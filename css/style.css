@@ -1,6 +1,11 @@
 *{margin:0;padding:0;list-style: none;border:0;}
-body{background: #000;}
-#canvas{margin:0 auto;border:1px solid #ccc;display: block;}
+body{background: url('../img/bg.jpg');}
+
+#congrat{
+	width: 100px;
+	height: 100px;
+}
+#canvas{margin:0 auto;display: block;}
 .btn a{
 width:100px;height:35px;
 line-height: 35px;background: #abcdef;
