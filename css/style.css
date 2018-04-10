@@ -1,0 +1,11 @@
+*{margin:0;padding:0;list-style: none;border:0;}
+body{background: #000;}
+#canvas{margin:0 auto;border:1px solid #ccc;display: block;}
+.btn a{
+width:100px;height:35px;
+line-height: 35px;background: #abcdef;
+color: #fff;text-align: center;
+display: inline-block;text-decoration: none;
+border-radius: 10px;
+}
+.btn{width: 215px;margin:20px auto;}
