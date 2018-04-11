@@ -1,8 +1,9 @@
-// 初始化canvans
-// var congrat = document.getElementById('congrat');
+// 创建canvans
 var bombCanvas = document.createElement("canvas");
+// 设置canvans属性
 bombCanvas.setAttribute('id','canvas');
 bombCanvas.setAttribute('class','canvas');  
+// canvans添加到DOM树
 document.body.appendChild(bombCanvas);
 var canvas=document.getElementById("canvas");
 var ctx=canvas.getContext("2d");
@@ -15,24 +16,18 @@ var beginMove=document.getElementById("beginMove");
 var stopMove=document.getElementById("stopMove");
 var colorArr=["#EF5350", "#EC407A", "#AB47BC", "#7E57C2", "#5C6BC0", "#42A5F5", "#29B6F6", "#26C6DA", "#26A69A",
 "#66BB6A", "#9CCC65", "#D4E157", "#FFEE58", "#FFCA28", "#FFA726", "#FF7043", "#8D6E63", "#BDBDBD", "#78909C"];
-// console.log(congrat);
-// var text = '<h1>v.username</h1><h3>v.score</h3><h2>v.organization</h2><p>v.message</p>';
-// document.getElementById('congrat').innerHTML(text);
-
+// 添加文字DOM树
+// var congrat = document.getElementById('congrat');
+var text = '<h1>何晓曼</h1><h3>+100分</h3><h2>来自银河战队</h2><p>拿到首杀</p>';
+$("#congrat").html(text);
+// 初始化定时器
+var timer;
 function rnd(min, max) {
     return ((Math.random() * (max - min)) + min);
 }
 // 绘制canvans
 function circularInit(){
 	ctx.clearRect(0,0,canvas.width,canvas.height);
-	// ctx.font="5px Courier New";
-	// ctx.fillStyle="#ccc";
-	//设置字体样式
-    ctx.font = "30px Courier New";
-    //设置字体填充颜色
-    ctx.fillStyle = "#fff";
-	// ctx.fillText("文案内容",canvas.width -270,canvas.height -10);
-	ctx.fillText("爆炸效果的显示", 200, 300);
 	for(var i=0;i<100;i++){
 		var circular={
 			x:canvas.width/2,
@@ -40,7 +35,7 @@ function circularInit(){
 			r:Math.random()*6+2,
 			vx: rnd((-1) * 10, 10),
 			vy: rnd((-1) * 10, 10),
-			//color:colorArr[Math.floor(Math.random()*colors.length)]
+			// color:colorArr[Math.floor(Math.random()*colors.length)]
 		}
 		circularArr.push(circular);
 		circularArr[i].x+=circularArr[i].vx,
@@ -60,16 +55,36 @@ function circularInit(){
 		ctx.fill();
 	}
 }
-var timer=setInterval(TIME,80);
+// 绘制canvans函数
 function TIME(){
     circularInit();
 }
 beginMove.onclick=function(){
 	timer=setInterval(TIME,80);
+    $('.canvas').css('display','block');
+    $('.bomb').css('display','block');
+    $('.congrat').addClass('animated Largen');
+    $('.aureole').addClass('animated LargenRotate');
+    setTimeout(function(){
+        // 去掉animationLargen
+        $('.aureole').removeClass('LargenRotate');
+        $('.aureole').addClass('Rotate');
+    },2000);
 }
 stopMove.onclick=function(){
-    console.log(0);
 	clearInterval(timer);
+    // 添加消失效果fadeOut
+    $('.bomb').addClass('animated fadeOut');
+    $('.canvas').addClass('animated fadeOut');
+    $('.aureole').removeClass('Rotate fadeOut');
+    setTimeout(function(){
+        // 移除fadeOut并且重回none,为下一次开始准备
+        $('.canvas').removeClass('fadeOut');
+        $('.canvas').css('display','none');
+        $('.bomb').removeClass('fadeOut');
+        $('.bomb').css('display','none');
+    },2000);
+
 }
 
 
